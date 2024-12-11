@@ -121,7 +121,7 @@ def get_bet():
     return amount
 
 
-def spin():
+def spin(balance):
     lines = get_number_of_lines()
     while True:
         bet = get_bet()
@@ -141,17 +141,19 @@ def spin():
     print(f"You won ${winnings}.")
     # * (splat) is used separate/unpack each line
     print(f"You won on lines:", *winning_lines)
-    return winning_lines - total_bet
+    return winnings - total_bet
 
 
 def main():
     balance = deposit()
     while True:
         print(f"Current balance is ${balance}")
-        spin = input("Press enter to play (q to quit).")
-        if spin == "q":
+        answer = input("Press enter to play (q to quit).")
+        if answer == "q":
             break
-        balance += spin()
+        balance += spin(balance)
+
+    print(F"You are left with ${balance}")
 
 
 main()
